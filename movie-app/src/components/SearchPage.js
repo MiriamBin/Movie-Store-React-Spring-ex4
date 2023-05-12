@@ -1,10 +1,35 @@
 import { useState } from "react";
+import {Form} from "react-bootstrap";
 
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState("");
-    const [movies, setMovies] = useState([]);
-
+    const [listMovies, setListMovies] = useState([]);
     const API_KEY = "78d0428861881a4570bce56c00beab85";
+
+    function handleResponse(response) {
+        if (!response.ok) {
+            throw new Error(" MOO! Something went wrong. Please try again later.");
+        }
+        return response.json(); // Parse the JSON response
+    }
+
+    /**
+     * This function handles the parsed JSON data received from the server
+     * @param response - the parsed JSON data received from the server
+     */
+    function handleJson(response) {
+        // Handle the parsed JSON data received from the server
+        console.log(response);
+        setListMovies(response.results);
+    }
+
+    /**
+     * This function handles the error message
+     * @param err - the error message
+     */
+    function handleError(err) {
+        console.error(err);
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -12,15 +37,15 @@ function SearchPage() {
         fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}&include_video=false`
         )
-            .then((response) => response.json())
-            .then((response) => setMovies(response.results))
-            .catch((err) => console.error(err));
+            .then(handleResponse)
+            .then(handleJson)
+            .catch(handleError);
     };
 
     return (
         <div>
             <h1>Movie Search</h1>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     value={searchQuery}
@@ -28,9 +53,9 @@ function SearchPage() {
                     placeholder="Search for movies..."
                 />
                 <button type="submit">Search</button>
-            </form>
+            </Form>
             <ul>
-                {movies.map((movie) => (
+                {listMovies.map((movie) => (
                     <li key={movie.id}>{movie.title}</li>
                 ))}
             </ul>
