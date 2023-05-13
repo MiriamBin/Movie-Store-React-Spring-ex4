@@ -1,14 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {Form} from "react-bootstrap";
+import MediaList from "./MediaList";
 
-function SearchPage() {
+function SearchPage({cartItems, setCartItems}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [listMovies, setListMovies] = useState([]);
     const API_KEY = "78d0428861881a4570bce56c00beab85";
 
     function handleResponse(response) {
         if (!response.ok) {
-            throw new Error(" MOO! Something went wrong. Please try again later.");
+            throw new Error("Something went wrong. Please try again later.");
         }
         return response.json(); // Parse the JSON response
     }
@@ -54,11 +55,8 @@ function SearchPage() {
                 />
                 <button type="submit">Search</button>
             </Form>
-            <ul>
-                {listMovies.map((movie) => (
-                    <li key={movie.id}>{movie.title}</li>
-                ))}
-            </ul>
+            <MediaList listMovies={listMovies} cartItems={cartItems} setCartItems={setCartItems}/>
+
         </div>
     );
 }

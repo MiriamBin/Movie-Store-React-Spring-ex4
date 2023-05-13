@@ -1,8 +1,10 @@
- function CartPage(){
-    return(
-        <div>
-            <h1>CartPage</h1>
-        </div>
+import MediaList from "./MediaList";
+
+function CartPage({cartItems}) {
+    return (
+        <>
+           <MediaList listMovies={cartItems}/>
+        </>
     )
- }
-    export default CartPage;
+}
+export default CartPage;
