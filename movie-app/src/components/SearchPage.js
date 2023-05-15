@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {Form} from "react-bootstrap";
 import MediaList from "./MediaList";
 
@@ -6,6 +6,7 @@ function SearchPage({cartItems, setCartItems}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [listMovies, setListMovies] = useState([]);
     const API_KEY = "78d0428861881a4570bce56c00beab85";
+
 
     function handleResponse(response) {
         if (!response.ok) {
