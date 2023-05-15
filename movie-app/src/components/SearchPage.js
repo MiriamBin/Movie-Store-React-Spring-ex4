@@ -1,64 +1,64 @@
-import { useState } from "react";
-import {Form} from "react-bootstrap";
-import MediaList from "./MediaList";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Form } from 'react-bootstrap';
+import MediaList from './MediaList';
 
-function SearchPage({cartItems, setCartItems}) {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [listMovies, setListMovies] = useState([]);
-    const API_KEY = "78d0428861881a4570bce56c00beab85";
+const useFetch = (initialUrl, initialData) => {
+    const [data, setData] = useState(initialData);
+    const [url, setUrl] = useState(initialUrl);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsError(false);
+            setIsLoading(true);
+            try {
+                const response = await axios(url);
+                setData(response.data);
+            } catch (error) {
+                setIsError(true);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-    function handleResponse(response) {
-        if (!response.ok) {
-            throw new Error("Something went wrong. Please try again later.");
-        }
-        return response.json(); // Parse the JSON response
-    }
+        fetchData();
+    }, [url]);
 
-    /**
-     * This function handles the parsed JSON data received from the server
-     * @param response - the parsed JSON data received from the server
-     */
-    function handleJson(response) {
-        // Handle the parsed JSON data received from the server
-        console.log(response);
-        setListMovies(response.results);
-    }
+    return [{ data, isLoading, isError }, setUrl];
+};
 
-    /**
-     * This function handles the error message
-     * @param err - the error message
-     */
-    function handleError(err) {
-        console.error(err);
-    }
+function SearchPage({ cartItems, setCartItems }) {
+    const API_KEY = '78d0428861881a4570bce56c00beab85';
+    const FETCH_ERROR_MSG = 'Something went wrong...';
 
-    const handleSubmit = async (event) => {
+    const [searchQuery, setSearchQuery] = useState('');
+    const TMBD_SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&include_adult=false&include_video=false&query=`;
+    const TMBD_SEARCH_DEFAULT = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&include_adult=false&query=cars&include_video=false`;
+    const [{ data, isLoading, isError }, doFetch] = useFetch(TMBD_SEARCH_DEFAULT, { results: [] });
+
+    const handleSubmit = (event) => {
         event.preventDefault();
+        doFetch(TMBD_SEARCH_URL + encodeURIComponent(searchQuery));
 
-        fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}&include_video=false`
-        )
-            .then(handleResponse)
-            .then(handleJson)
-            .catch(handleError);
     };
 
     return (
-        <div>
-            <h1>Movie Search</h1>
-            <Form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
-                    placeholder="Search for movies..."
-                />
-                <button type="submit">Search</button>
-            </Form>
-            <MediaList listMovies={listMovies} cartItems={cartItems} setCartItems={setCartItems}/>
+        <>
+            <form onSubmit={handleSubmit}>
+                <input type="text" className="form-control" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
+                <button className="btn btn-primary" type="submit">Search</button>
+            </form>
 
-        </div>
+            {isError && <div className="alert alert-danger">{FETCH_ERROR_MSG}</div>}
+
+            {isLoading ? (
+                <div className="alert alert-warning">Loading (this could be animated gif instead)...</div>
+            ) : (
+                <MediaList listMovies={data.results} cartItems={cartItems} setCartItems={setCartItems} />
+            )}
+        </>
     );
 }
 
