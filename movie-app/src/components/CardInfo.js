@@ -2,6 +2,22 @@ import {Button, Card} from "react-bootstrap";
 
 function CardInfo({movieData, cartItems, setCartItems}) {
 
+    function handleResponse(response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Something went wrong');
+        }
+    }
+
+    function handleJson(data) {
+        console.log(data);
+    }
+
+    function handleError(error) {
+        console.log(error);
+    }
+
     function addToCart(event) {
         event.preventDefault();
         //setCartItems((cartItems)=>[...cartItems, movieData]);
@@ -17,16 +33,10 @@ function CardInfo({movieData, cartItems, setCartItems}) {
                 msg: "movieData", // Here you can put any data you want to send to server
             }),
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            .then(handleResponse)
+            .then(handleJson)
+            .catch(handleError);
     }
-
-
 
 
     return (

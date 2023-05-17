@@ -2,6 +2,7 @@ package hac.springbeans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @Component("cartBean")
+@Primary
 public class Cart implements Serializable {
     @Serial
     private static final long serialVersionUID = 1234567L;
