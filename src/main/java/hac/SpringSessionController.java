@@ -3,13 +3,11 @@ package hac;
 import hac.springbeans.Cart;
 import hac.springbeans.Product;
 
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -19,10 +17,30 @@ public class SpringSessionController {
     private Cart sessionCart;
 
     @PostMapping("/addProduct")
-    public Product persistMessage(@RequestBody Product msg) {
-        sessionCart.add(msg);  // Add the product that was sent in the request
+    public Product persistMessage(@RequestBody Product product) {
+        sessionCart.add(product);  // Add the product that was sent in the request
         System.out.println("Added product to cart"); //TODO: DEBUG
-        System.out.println(msg.getMsg());
-        return msg;
+        System.out.println(product.getTitle());
+        return product;
     }
+
+    @GetMapping("/getCart")
+    public ArrayList<Product> getCart() {
+        return sessionCart.getCart();
+    }
+
+//    @PostMapping("/removeProduct")
+//    public Product removeProduct(@RequestBody Product product) {
+//        sessionCart.removeProduct(product);  // Remove the product that was sent in the request
+//        System.out.println("Removed product from cart"); //TODO: DEBUG
+//        System.out.println(product.getTitle());
+//        return product;
+//    }
+
+//    @PostMapping("/clearCart")
+//    public Cart clearCart() {
+//        sessionCart.setCart(new ArrayList<Product>());  // Clear the cart
+//        System.out.println("Cleared cart"); //TODO: DEBUG
+//        return sessionCart;
+//    }
 }

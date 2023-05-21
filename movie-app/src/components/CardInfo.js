@@ -1,7 +1,9 @@
 import {Button, Card} from "react-bootstrap";
 import "./CardInfo.css"
 
-function CardInfo({movieData, cartItems, setCartItems}) {
+function CardInfo({movieData}) {
+
+    const PRICE = 3.99;
 
     function handleResponse(response) {
         if (response.ok) {
@@ -31,7 +33,11 @@ function CardInfo({movieData, cartItems, setCartItems}) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                msg: "movieData", // Here you can put any data you want to send to server
+                id: movieData.id,
+                title: movieData.title,
+                price: PRICE,
+                imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`,
+
             }),
         })
             .then(handleResponse)

@@ -9,9 +9,6 @@ function MediaList({ listMovies, cartItems, setCartItems }) {
         return null; // Return null or show an alternative component/error message when listMovies is not an array
     }
 
-
-
-
     return (
         <Container>
             <Row className="justify-content-center g-lg-5 g-md-4 g-sm-3 ">

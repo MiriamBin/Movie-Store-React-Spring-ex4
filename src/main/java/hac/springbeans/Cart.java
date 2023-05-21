@@ -1,10 +1,7 @@
 package hac.springbeans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,26 +13,31 @@ public class Cart implements Serializable {
     @Serial
     private static final long serialVersionUID = 1234567L;
 
-    private ArrayList<Product> Cart;
+    private ArrayList<Product> cart;
 
     public Cart() {
-        Cart = new ArrayList<Product>();
+        cart = new ArrayList<Product>();
     }
 
     public void add(Product product) {
-        // TODO check if product is already in cart
-        Cart.add(product);
+        if(!cart.contains(product)){
+            cart.add(product);
+            System.out.println("Added product to cart" + product.getId());
+        }
+        else {
+            System.out.println("Product already in cart"+ product.getId());
+        }
     }
 
     public void removeProduct(Product product) {
-        Cart.remove(product);
+        cart.remove(product);
     }
 
     public ArrayList<Product> getCart() {
-        return Cart;
+        return cart;
     }
 
     public void setCart(ArrayList<Product> cart) {
-        Cart = cart;
+        this.cart = cart;
     }
 }
