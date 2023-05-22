@@ -87,8 +87,8 @@ function CardInfo({movieData}) {
                     <Card.Text>
                         price: {'3.99$'} {/*TODO: to change to a const variable*/}
                     </Card.Text>
-                    <Button variant="primary" onClick={addToCart}>Add to cart</Button>
-                    <Button className="btn">Read more</Button>
+                    <Button className="content-btn" onClick={addToCart}>Add to cart</Button>
+                    <Button className="content-btn">Read more</Button>
                 </div>
             </div>
         </Card>

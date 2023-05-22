@@ -11,7 +11,7 @@ function AppNavbar(){
                 <Navbar.Brand to="#home">Exercise 4</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Search</Nav.Link>
-                    <Nav.Link href="/cart-page">Cart</Nav.Link>
+                    <Nav.Link href="/cart-page">Cart</Nav.Link>ג
                 </Nav>
             </Container>
         </Navbar>

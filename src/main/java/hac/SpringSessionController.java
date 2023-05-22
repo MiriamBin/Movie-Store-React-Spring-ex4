@@ -21,7 +21,7 @@ public class SpringSessionController {
         sessionCart.add(product);  // Add the product that was sent in the request
         System.out.println("Added product to cart"); //TODO: DEBUG
         System.out.println(product.getTitle());
-        return product;
+        return product; //TODO: maybe return the cart instead?
     }
 
     @GetMapping("/getCart")
