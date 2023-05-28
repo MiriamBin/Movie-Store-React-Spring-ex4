@@ -14,6 +14,7 @@ public class Cart implements Serializable {
     private static final long serialVersionUID = 1234567L;
 
     private ArrayList<Product> cart;
+    private double total;
 
     public Cart() {
         cart = new ArrayList<Product>();
@@ -29,9 +30,19 @@ public class Cart implements Serializable {
         }
     }
 
-    public void removeProduct(Product product) {
-        cart.remove(product);
+    public void removeProduct(Integer id) {
+        Product productToRemove = null;
+        for (Product product : cart) {
+            if (product.getId().equals(id)) {
+                productToRemove = product;
+                break;
+            }
+        }
+        if (productToRemove != null) {
+            cart.remove(productToRemove);
+        }
     }
+
 
     public ArrayList<Product> getCart() {
         return cart;
@@ -39,5 +50,21 @@ public class Cart implements Serializable {
 
     public void setCart(ArrayList<Product> cart) {
         this.cart = cart;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Double getTotalPrice() {
+        Double total = 0.0;
+        for (Product product : cart) {
+            total += product.getPrice();
+        }
+        return total;
     }
 }

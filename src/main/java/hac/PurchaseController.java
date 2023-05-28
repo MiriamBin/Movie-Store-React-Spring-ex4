@@ -22,7 +22,7 @@ public class PurchaseController {
 
     @PostMapping("/doPurchase")
     public Purchase addPurchase(@Valid @RequestBody Purchase purchase) {
-        return repository.save(purchase); // this is a JPA method to save a purchase to the database
+        return repository.save(purchase); // this is a JPA method to save a purchase to the database.
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

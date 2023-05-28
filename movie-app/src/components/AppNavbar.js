@@ -1,22 +1,25 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import {Outlet} from "react-router-dom";
+import {Navbar, Nav, Row} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 
 function AppNavbar(){
     return(
         <>
-        <Navbar bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand to="#home">Exercise 4</Navbar.Brand>
+            <Navbar bg="dark" variant="dark">
+                <LinkContainer to="/">
+                    <Navbar.Brand> TMDB </Navbar.Brand>
+                </LinkContainer>
                 <Nav className="me-auto">
-                    <Nav.Link href="/">Search</Nav.Link>
-                    <Nav.Link href="/cart-page">Cart</Nav.Link>ג
+                    <LinkContainer to="/">
+                        <Nav.Link> Search </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={"/cart-page"}>
+                        <Nav.Link> Cart </Nav.Link>
+                    </LinkContainer>
                 </Nav>
-            </Container>
-        </Navbar>
-        <Outlet/>
-        {/* An <Outlet> renders whatever child route is currently active,
+            </Navbar>
+            <Outlet />
+            {/* An <Outlet> renders whatever child route is currently active,
             so you can think about this <Outlet> as a placeholder for
             the child routes we defined above. */}
         </>
