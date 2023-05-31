@@ -1,7 +1,11 @@
 import {Button, Card} from "react-bootstrap";
-import "./CardInfo.css"
+import "./styles/CardInfo.css"
+import {AppContext} from "../App";
+import {useContext} from "react";
 
 function CardInfo({movieData}) {
+
+    const {setCartSize} = useContext(AppContext);
 
     const PRICE = 3.99;
 
@@ -14,7 +18,7 @@ function CardInfo({movieData}) {
     }
 
     function handleJson(data) {
-        console.log(data);
+        //console.log(data); TODO: get other from server
     }
 
     function handleError(error) {
@@ -23,8 +27,7 @@ function CardInfo({movieData}) {
 
     function addToCart(event) {
         event.preventDefault();
-        //setCartItems((cartItems)=>[...cartItems, movieData]);
-        //console.log(cartItems);
+        setCartSize(prev => prev + 1);
 
         // Send POST request to server
         fetch('/addProduct', {
@@ -49,7 +52,7 @@ function CardInfo({movieData}) {
         if (movieData.poster_path) {
             return `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
         } else {
-            return './image-not-found-resized.jpg'; // Replace with the URL of your default image
+            return './image-not-found.jpg'; // Replace with the URL of your default image
         }
     }
 

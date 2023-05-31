@@ -1,0 +1,1 @@
+export const MSG_PAGE_NOT_FOUND = "Page not found!";

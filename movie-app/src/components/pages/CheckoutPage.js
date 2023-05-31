@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
-import "./SearchStyle.css";
+import "../styles/CheckoutStyle.css";
+import Container from "react-bootstrap/Container";
 
 function CheckoutPage() {
     const [firstName, setFirstName] = useState('');
@@ -20,7 +21,7 @@ function CheckoutPage() {
     };
 
     const validateName = (name) => {
-        var re = /^[a-zA-Z\s]*$/;
+        let re = /^[a-zA-Z\s]*$/;
         return re.test(name);
     };
 
@@ -75,39 +76,60 @@ function CheckoutPage() {
     };
 
     return (
-        <div className="container form col-6">
-            <h1 id="heading">Checkout</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="field m-3">
-                    <input required type="text" placeholder="Enter first name" value={firstName} onChange={e => setFirstName(e.target.value)} className={firstNameInvalid ? 'is-invalid' : ''} />
-                </div>
-                <Alert variant="danger" show={firstNameInvalid} >
-                    {VALIDATION_MESSAGE_NAME}
-                </Alert>
+        <Container bg="transparent" text="white" className="col-6">
+            <Form className="checkout-form" onSubmit={handleSubmit}>
+                <Form.Text id="checkout-form-heading">Checkout</Form.Text>
+                <Form.Group className="checkout-form-field m-3">
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter first name"
+                        value={firstName}
+                        onChange={e => setFirstName(e.target.value)}
+                        isInvalid={firstNameInvalid}
+                    />
+                    <Alert variant="danger" show={firstNameInvalid}>
+                        {VALIDATION_MESSAGE_NAME}
+                    </Alert>
+                </Form.Group>
 
-                <div className="field m-3">
-                    <input required type="text" placeholder="Enter last name" value={lastName} onChange={e => setLastName(e.target.value)} className={lastNameInvalid ? 'is-invalid' : ''} />
-                </div>
-                <Alert variant="danger" show={lastNameInvalid} >
-                    {VALIDATION_MESSAGE_NAME}
-                </Alert>
+                <Form.Group className="checkout-form-field m-3">
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter last name"
+                        value={lastName}
+                        onChange={e => setLastName(e.target.value)}
+                        isInvalid={lastNameInvalid}
+                    />
+                    <Alert variant="danger" show={lastNameInvalid}>
+                        {VALIDATION_MESSAGE_NAME}
+                    </Alert>
+                </Form.Group>
 
-                <div className="field m-3">
-                    <input required type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} className={emailInvalid ? 'is-invalid' : ''} />
-                </div>
-                <Alert variant="danger" show={emailInvalid} >
-                    {VALIDATION_MESSAGE_EMAIL}
-                </Alert>
+                <Form.Group className="checkout-form-field m-3">
+                    <Form.Control
+                        required
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        isInvalid={emailInvalid}
+                    />
+                    <Alert variant="danger" show={emailInvalid}>
+                        {VALIDATION_MESSAGE_EMAIL}
+                    </Alert>
+                </Form.Group>
 
-                <div style={{ textAlign: 'center', marginTop: '2em' }}>
-                    <button className="search-btn" type="submit">
+
+                    <Button className="checkout-form-btn" type="submit">
                         Complete Purchase
-                    </button>
-                </div>
-            </form>
-        </div>
-    );
+                    </Button>
 
+            </Form>
+        </Container>
+    );
 }
 
 export default CheckoutPage;
+

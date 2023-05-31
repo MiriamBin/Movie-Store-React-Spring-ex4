@@ -14,7 +14,7 @@ public class Product implements Serializable {
         this.id = 0;
         this.title = "";
         this.price = 3.99;
-        this.imageUrl = "movie-app/public/image-not-found-resized.jpg";
+        this.imageUrl = "movie-app/public/image-not-found.jpg";
     }
 
     public Product(Integer id, String title, Double price, String image) {

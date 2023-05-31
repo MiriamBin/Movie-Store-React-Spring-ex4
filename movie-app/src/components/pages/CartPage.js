@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import MediaList from "./MediaList";
-import CartItems from "./CartItems";
+import CartItems from "../CartItems";
 import {Button, Col, Row} from "react-bootstrap";
-import OrderSummary from "./OrderSummary";
+import OrderSummary from "../OrderSummary";
 import Container from "react-bootstrap/Container";
-import "./CartSytle.css"
-import MessageToast from "./MessageToast";
+import "../styles/CartSytle.css"
+
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);

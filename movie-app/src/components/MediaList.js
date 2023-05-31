@@ -3,7 +3,7 @@ import React from "react";
 import {Alert, Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
-function MediaList({ listMovies, cartItems, setCartItems }) {
+function MediaList({ listMovies }) {
     // TODO: i don't understand for what this function is used
     if (!Array.isArray(listMovies)) {
         return null; // Return null or show an alternative component/error message when listMovies is not an array

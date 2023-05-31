@@ -1,28 +1,28 @@
-.form {
+.filter-tabs {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-left: 2em;
     padding-right: 2em;
-    padding-bottom: 0.4em;
+    padding-bottom: 2em;
     background-color: #171717;
     border-radius: 25px;
     transition: .4s ease-in-out;
 }
 
-.form:hover {
+.filter-tabs:hover {
     transform: scale(0.95);
     border: 1px solid black;
 }
 
-#heading {
+#justify-tab-example {
     text-align: center;
-    margin: 2em;
+    margin: 1em;
     color: #fff;
     font-size: 1.2em;
 }
 
-.field {
+.tab-pane {
     display: flex;
     align-items: center;
     gap: 0.5em;
@@ -35,7 +35,7 @@
     box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
 }
 
-.field input {
+.tab-pane input {
     background: none;
     border: none;
     outline: none;
@@ -44,15 +44,16 @@
     text-align: center;
 }
 
-.field input:focus {
+.tab-pane input:focus {
     color: #d3d3d3;
     background-color: #171717;
     outline: none !important;
     box-shadow: none !important;
 }
 
-.search-btn {
-    margin-bottom: 3em;
+.filter-tabs-btn {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
     padding: 0.5em;
     border-radius: 5px;
     border: none;
@@ -62,7 +63,7 @@
     color: #fff;
 }
 
-.search-btn:hover {
+.filter-tabs-btn:hover {
     background-color: black;
     color: #fff;
 }

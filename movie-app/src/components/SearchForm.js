@@ -1,36 +1,47 @@
 import React, { useState } from 'react';
 import {Button, Form} from 'react-bootstrap';
 import HistorySearch from './HistorySearch';
+import {useContext} from 'react';
+import {AppContext} from "../App";
+import "./styles/SearchFormStyle.css"
+import {SEARCH_MOVIES_URL} from "./constants/ApiUrl";
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ setMoviesUrl}) {
+    //TODO: handle empty search query
+    const {searchHistory, setSearchHistory} = useContext(AppContext);
     const [searchQuery, setSearchQuery] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit(searchQuery);
+        setMoviesUrl(SEARCH_MOVIES_URL + encodeURIComponent(searchQuery) +`&page=${1}`);
+        setSearchHistory([...searchHistory, searchQuery]);
+        setSearchQuery('');
     };
 
-    return (
-        <>
-            <Form className="form" onSubmit={handleSubmit}>
-                <Form.Text id="heading">Search</Form.Text>
-                <Form.Group className="field" onClick={() => setShowDropdown(!showDropdown)}>
-                    <Form.Control
-                        placeholder="bla bla bla"
-                        type="text"
-                        value={searchQuery}
-                        onChange={(event) => setSearchQuery(event.target.value)}
-                    />
-                </Form.Group>
+    const handleOnChange = (event) => {
+        setSearchQuery(event.target.value);
+    }
 
-                <HistorySearch  setSearchQuery={setSearchQuery} showDropdown={showDropdown} />
-                <Button className="search-btn" type="submit">
-                    Search
-                </Button>
-            </Form>
-        </>
+    return (
+        <Form bg="transparent" text="white" onSubmit={handleSubmit}>
+            <Form.Text id="heading">Search</Form.Text>
+            <Form.Group className="search-form-field" onClick={() => setShowDropdown(!showDropdown)}>
+                <Form.Control
+                    placeholder="Titles, people..."
+                    type="text"
+                    value={searchQuery}
+                    onChange={handleOnChange}/>
+            </Form.Group>
+            <HistorySearch setSearchQuery={setSearchQuery} showDropdown={showDropdown} />
+            <Button className="search-form-search-btn" type="submit">
+                Search
+            </Button>
+        </Form>
     );
 }
 
 export default SearchForm;
+
+
+

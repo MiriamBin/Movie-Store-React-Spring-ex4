@@ -1,6 +1,6 @@
 import {Button, Card, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import "./CartSytle.css"
+import "./styles/CartSytle.css"
 
 function OrderSummary({totalPrice, cartItems}){
     return (
