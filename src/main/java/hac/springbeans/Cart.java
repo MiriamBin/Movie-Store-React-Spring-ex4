@@ -23,14 +23,13 @@ public class Cart implements Serializable {
     public void add(Product product) {
         if(!cart.contains(product)){
             cart.add(product);
-            System.out.println("Added product to cart" + product.getId());
         }
         else {
             System.out.println("Product already in cart"+ product.getId());
         }
     }
 
-    public void removeProduct(Integer id) {
+    public boolean removeProduct(Integer id) {
         Product productToRemove = null;
         for (Product product : cart) {
             if (product.getId().equals(id)) {
@@ -40,9 +39,12 @@ public class Cart implements Serializable {
         }
         if (productToRemove != null) {
             cart.remove(productToRemove);
+            total -= productToRemove.getPrice();
+            return true;
         }
+        System.out.println("Product with id: " + id + " not found in cart");
+        return false;
     }
-
 
     public ArrayList<Product> getCart() {
         return cart;

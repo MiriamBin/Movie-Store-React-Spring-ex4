@@ -5,9 +5,12 @@ import hac.springbeans.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @RestController
@@ -23,22 +26,26 @@ public class SpringSessionController {
         return product; //TODO: maybe return the cart instead?
     }
 
-    @GetMapping("/getCart")
+    @GetMapping("/getCart") //TODO: change it to SYNC
     public Cart getCart() {
         return sessionCart;
     }
 
     @PostMapping("/removeProduct")
-    public ArrayList<Product> removeProduct(@RequestBody Integer productId) {
-        sessionCart.removeProduct(productId);  // Remove the product that was sent in the request
-        System.out.println("Removed product from cart"); //TODO: DEBUG
-        return sessionCart.getCart();
+    public ResponseEntity<Cart> removeProduct(@RequestBody Map<String, Integer> product) {
+        Integer productId = product.get("id");
+        System.out.println("Removing product with id: " + productId);
+        if (!sessionCart.removeProduct(productId)) {
+            System.out.println(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(sessionCart, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(sessionCart, HttpStatus.OK);
     }
 
     @PostMapping("/clearCart")
     public Cart clearCart() {
         sessionCart.setCart(new ArrayList<Product>());  // Clear the cart
-        System.out.println("Cleared cart"); //TODO: DEBUG
+        sessionCart.setTotal(0);  // Clear the total
         return sessionCart;
     }
 }

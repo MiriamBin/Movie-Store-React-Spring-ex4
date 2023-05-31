@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,9 @@ public class PurchaseController {
     private PurchaseRepository repository;  // this is the JPA repository (SQL database)
 
     @PostMapping("/doPurchase")
-    public Purchase addPurchase(@Valid @RequestBody Purchase purchase) {
-        return repository.save(purchase); // this is a JPA method to save a purchase to the database.
+    public ResponseEntity<Purchase> addPurchase(@Valid @RequestBody Purchase purchase) {
+        Purchase savedPurchase = repository.save(purchase);
+        return new ResponseEntity<>(savedPurchase, HttpStatus.CREATED);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
