@@ -31,7 +31,8 @@ const useCart = () => {
         handleFetch('/getCart', 'GET')
             .then(data => {
                 setCartItems(data.cart);
-                setTotalPrice(data.total);
+                console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+                console.log(data.cart)
                 setLoading(false);
             })
             .catch(console.error);
@@ -66,3 +67,4 @@ const useCart = () => {
 
     return { cartItems, totalPrice, removeFromCart, clearCart, addToCart, loading }; // Add addToCart to the returned object
 }
+export default useCart;

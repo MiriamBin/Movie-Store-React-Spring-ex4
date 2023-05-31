@@ -25,32 +25,20 @@ function CardInfo({movieData}) {
         console.log(error);
     }
 
-    function addToCart(event) {
+    function handleAddToCart(event) {
         event.preventDefault();
-        setCartSize(prev => prev + 1);
-
-        // Send POST request to server
-        fetch('/addProduct', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: movieData.id,
-                title: movieData.title,
-                price: PRICE,
-                imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`,
-            }),
-        })
-            .then(handleResponse)
-            .then(handleJson)
-            .catch(handleError);
+        addToCart({
+            id: movieData.id,
+            title: movieData.title,
+            price: PRICE,
+            imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`, //TODO: USE CONSTANT
+        });
     }
 
     function getImageSource() {
         if (movieData.poster_path) {
             return `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
-        } else {
+        } else { //TODO: use constant
             return './image-not-found.jpg'; // Replace with the URL of your default image
         }
     }
@@ -89,7 +77,7 @@ function CardInfo({movieData}) {
                     <Card.Text>
                         price: {PRICE}
                     </Card.Text>
-                    <Button className="content-btn" onClick={addToCart}>Add to cart</Button>
+                    <Button className="content-btn" onClick={handleAddToCart}>Add to cart</Button>
                     <Button className="content-btn">Read more</Button>
                 </div>
             </div>

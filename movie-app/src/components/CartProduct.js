@@ -2,6 +2,7 @@ import { Button, Card, Col, Row, Image } from "react-bootstrap";
 
 function CartProduct({ product, removeFromCart }) {
     return (
+
         <Card className="bg-transparent border-white">
             <Row className="no-gutters">
                 <Col xs={12} md={4}>

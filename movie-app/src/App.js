@@ -9,7 +9,7 @@ import SearchPage from './components/pages/SearchPage';
 import CartPage from './components/pages/CartPage';
 import PageNotFound from './components/pages/PageNotFound';
 import CheckoutPage from './components/pages/CheckoutPage';
-import useCart from "./components/hooks/useCart";
+import useCart from './components/hooks/useCart'
 
 
 export const AppContext = React.createContext(null);

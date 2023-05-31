@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import useCart from '../hooks/useCart';
+import {useContext} from "react";
 import CartItems from '../CartItems';
 import OrderSummary from '../OrderSummary';
 import { MSG_EMPTY_CART } from '../constants/Messages';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import {AppContext} from "../../App";
 
 function CartPage() {
-    const { cartItems, totalPrice, removeFromCart, clearCart, loading } = useCart();
+    const { cartItems, totalPrice, removeFromCart, clearCart, loading }  = useContext(AppContext);
 
     useEffect(() => {
         if(!cartItems.length){
