@@ -5,7 +5,7 @@ import {useContext} from "react";
 
 function CardInfo({movieData}) {
 
-    const {setCartSize} = useContext(AppContext);
+    const {addToCart} = useContext(AppContext);
 
     const PRICE = 3.99;
 
@@ -40,7 +40,6 @@ function CardInfo({movieData}) {
                 title: movieData.title,
                 price: PRICE,
                 imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`,
-
             }),
         })
             .then(handleResponse)
@@ -88,7 +87,7 @@ function CardInfo({movieData}) {
                         {movieData.title}
                     </Card.Title>
                     <Card.Text>
-                        price: {'3.99$'} {/*TODO: to change to a const variable*/}
+                        price: {PRICE}
                     </Card.Text>
                     <Button className="content-btn" onClick={addToCart}>Add to cart</Button>
                     <Button className="content-btn">Read more</Button>

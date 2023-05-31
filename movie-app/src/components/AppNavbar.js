@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { AppContext } from '../App';
 
 function AppNavbar() {
-    const { cartSize } = useContext(AppContext);
+    const { cartItems } = useContext(AppContext);
 
     return (
         <>
@@ -20,7 +20,7 @@ function AppNavbar() {
                     </LinkContainer>
                     <LinkContainer to="/cart-page">
                         <Nav.Link>
-                            Cart <Badge>{cartSize}</Badge>
+                            Cart <Badge>{cartItems.length}</Badge>
                         </Nav.Link>
                     </LinkContainer>
                 </Nav>

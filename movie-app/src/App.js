@@ -9,6 +9,7 @@ import SearchPage from './components/pages/SearchPage';
 import CartPage from './components/pages/CartPage';
 import PageNotFound from './components/pages/PageNotFound';
 import CheckoutPage from './components/pages/CheckoutPage';
+import useCart from "./components/hooks/useCart";
 
 
 export const AppContext = React.createContext(null);
@@ -28,13 +29,13 @@ const historyReducer = (state, action) => {
     }
 }
 
-
 function App() {
     const [cartSize, setCartSize] = useState(0);
     const [searchHistory, setSearchHistory] = useState([]);
+    const { cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart} = useCart();
 
     return (
-        <AppContext.Provider value={{ cartSize, setCartSize, searchHistory, setSearchHistory }}>
+        <AppContext.Provider value={{ cartSize, setCartSize, searchHistory, setSearchHistory, cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart}}>
             <div
                 style={{
                     background: '#212121',
