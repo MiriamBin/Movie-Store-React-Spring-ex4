@@ -23,6 +23,7 @@ public class Cart implements Serializable {
     public void add(Product product) {
         if(!cart.contains(product)){
             cart.add(product);
+            total += product.getPrice();
         }
         else {
             System.out.println("Product already in cart"+ product.getId());

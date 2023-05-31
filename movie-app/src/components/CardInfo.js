@@ -58,7 +58,6 @@ function CardInfo({movieData}) {
     Poster Path: "/u4G8EkiIBZYx0wEg2xDlXZigTOZ.jpg"
     Video: false
 */
-    console.log(movieData); //TODO: to be removed
 
     return (
         <Card className="myCard">

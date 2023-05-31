@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
 import "../styles/CheckoutStyle.css";
 import Container from "react-bootstrap/Container";
+import {useNavigate} from "react-router-dom";
+import {AppContext} from "../../App";
 
 function CheckoutPage() {
     const [firstName, setFirstName] = useState('');
@@ -14,6 +16,15 @@ function CheckoutPage() {
 
     const VALIDATION_MESSAGE_NAME = 'Please enter a valid name';
     const VALIDATION_MESSAGE_EMAIL = 'Please enter a valid email';
+
+    const navigate = useNavigate();
+    const { cartItems, clearCart } = useContext(AppContext);
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            navigate('/cart-page');
+        }
+    }, [cartItems, navigate]);
 
     const validateEmail = (email) => {
         let re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -56,7 +67,8 @@ function CheckoutPage() {
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Success:', data);
+                    clearCart();
+                   // console.log('Success:', data); //TODO: redirect to success page
                 })
                 .catch((errorPromise) => {
                     errorPromise.then((errorMap) => {
@@ -121,10 +133,9 @@ function CheckoutPage() {
                     </Alert>
                 </Form.Group>
 
-
-                    <Button className="checkout-form-btn" type="submit">
-                        Complete Purchase
-                    </Button>
+                <Button className="checkout-form-btn" type="submit">
+                    Complete Purchase
+                </Button>
 
             </Form>
         </Container>

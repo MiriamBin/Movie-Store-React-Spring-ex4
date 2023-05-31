@@ -1,6 +1,7 @@
 import {Button, Card, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import "./styles/CartSytle.css"
+import {LinkContainer} from "react-router-bootstrap";
 
 function OrderSummary({totalPrice, cartItems}){
     return (
@@ -10,12 +11,13 @@ function OrderSummary({totalPrice, cartItems}){
                     <Card.Title className="mb-3">Order Summary</Card.Title>
                     <Card.Text className="mb-3">Price: ${totalPrice}</Card.Text>
                     <div className="d-flex justify-content-center">
-                        <Button
-                            className="content-btn-cart"
-                            href="/checkout-page"
-                            disabled={cartItems.length === 0}>
-                            Checkout
-                        </Button>
+                        <LinkContainer to="/checkout-page">
+                            <Button
+                                className="content-btn-cart"
+                                disabled={cartItems.length === 0}>
+                                Checkout
+                            </Button>
+                        </LinkContainer>
                     </div>
                 </Card.Body>
             </Card>

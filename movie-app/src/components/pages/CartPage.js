@@ -3,7 +3,7 @@ import {useContext} from "react";
 import CartItems from '../CartItems';
 import OrderSummary from '../OrderSummary';
 import { MSG_EMPTY_CART } from '../constants/Messages';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import {Container, Row, Col, Button, Spinner} from 'react-bootstrap';
 import {AppContext} from "../../App";
 
 function CartPage() {
@@ -16,10 +16,11 @@ function CartPage() {
     }, [cartItems]);
 
     if (loading) {
-        return <div>Loading...</div>; // Or some loading spinner
+        return <Spinner animation="border" variant="light"/>;
     }
 
     return (
+
         <>
             {cartItems.length === 0 ? (
                     <Row className="justify-content-center text-center m-3">
