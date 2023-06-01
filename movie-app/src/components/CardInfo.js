@@ -1,7 +1,7 @@
 import {Button, Card, Modal} from "react-bootstrap";
 import "./styles/CardInfo.css"
 import {AppContext} from "../App";
-import {DEFAULT_MOVIE_IMAGE_URL} from "./constants/ApiUrl";
+import {DEFAULT_MOVIE_IMAGE_URL, TMDB_IMAGE_BASE_URL} from "./constants/ApiUrl";
 import {useContext, useState} from "react";
 
 function CardInfo({movieData}) {
@@ -16,13 +16,13 @@ function CardInfo({movieData}) {
             id: movieData.id,
             title: movieData.title,
             price: PRICE,
-            imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`, //TODO: USE CONSTANT
+            imageUrl: `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`,
         });
     }
 
     function getImageSource() {
         if (movieData.poster_path) {
-            return `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
+            return `${TMDB_IMAGE_BASE_URL}${movieData.poster_path}`;
         } else {
             return DEFAULT_MOVIE_IMAGE_URL;
         }

@@ -16,7 +16,7 @@ function FilterTabs({setMoviesUrl, queryParams, setQueryParams}) {
                     <SearchForm setMoviesUrl={setMoviesUrl} />
                 </Tab>
                 <Tab eventKey="Genres" title="Genres" className="tab-pane">
-                    <Genres setMoviesUrl={setMoviesUrl} />
+                    <Genres setQueryParams={setQueryParams} />
                 </Tab>
                 <Tab eventKey="Year-Filter" title="Year Filter" className="tab-pane">
                     <YearFilter queryParams={queryParams} setQueryParams={setQueryParams} />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Pagination, Row, Container } from 'react-bootstrap';
+import {Button, Card, Col, Container, Row} from 'react-bootstrap';
+import Pagination from "./Pagination";
 
 function YearFilter({ setQueryParams }) {
     const [years, setYears] = useState([]);
@@ -38,9 +39,6 @@ function YearFilter({ setQueryParams }) {
         setSelectedYear([]);
     };
 
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
     const totalPages = Math.ceil(years.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -91,20 +89,11 @@ function YearFilter({ setQueryParams }) {
                     </Container>
                 </Card.Body>
                 <Card.Footer>
-                    <Row className="justify-content-center text-center">
-                        {[...Array(totalPages).keys()].map((page) => (
-                            <Col xs={6} sm={3} md={2} lg={1} key={page + 1}>
-                                <Button
-                                    key={page + 1}
-                                    variant={currentPage === page + 1 ? 'light' : 'outline-light'}
-                                    className="w-100"
-                                    onClick={() => handlePageChange(page + 1)}
-                                >
-                                    {page + 1}
-                                </Button>
-                            </Col>
-                        ))}
-                    </Row>
+                    <Pagination
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
                 </Card.Footer>
             </Card>
         </>

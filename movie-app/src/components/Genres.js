@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import useFetch from './hooks/useFetch';
-import {POPULAR_MOVIES_URL, GENRES_MOVIE_LIST_URL} from "./constants/ApiUrl";
+import {GENRES_MOVIE_LIST_URL} from "./constants/ApiUrl";
+import {FETCH_ERROR_MSG} from "./constants/Messages";
 
 
-const FETCH_ERROR_MSG = 'Something went wrong...';
-
-function Genres({setMoviesUrl}) {
+function Genres({setQueryParams}) {
     const [{ data: genresData, isLoading: genreIsLoading, isError: genreIsError }, setGenreUrl] = useFetch(GENRES_MOVIE_LIST_URL, { genres: [] });
     const [selectedGenres, setSelectedGenres] = useState([]);
 
@@ -15,7 +14,7 @@ function Genres({setMoviesUrl}) {
         if (selectedGenres.length > 0) {
             genreIds = `&with_genres=${selectedGenres.map((genre) => genre.id).join('|')}`;
         }
-        setMoviesUrl(POPULAR_MOVIES_URL + genreIds + `&page=${1}`);
+        setQueryParams(genreIds);
     }, [selectedGenres]);
 
     const handleGenreSelect = (genre) => {

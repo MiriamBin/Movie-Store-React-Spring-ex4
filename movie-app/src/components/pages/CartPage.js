@@ -1,15 +1,17 @@
-import React, {useEffect, useState} from 'react';
 import { useContext } from "react";
 import CartItems from '../CartItems';
 import OrderSummary from '../OrderSummary';
-import { FETCH_ERROR_MSG, MSG_EMPTY_CART } from '../constants/Messages';
+import {MSG_EMPTY_CART } from '../constants/Messages';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { AppContext } from "../../App";
 import { MSG_CART_SERVER_ERROR } from '../constants/Messages';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useLocation} from "react-router-dom"; // Add this line for Bootstrap CSS
 
-
+/**
+ * CartPage component that renders the CartItems and OrderSummary components
+ * @returns {JSX.Element} CartPage component
+ * @constructor CartPage
+ */
 function CartPage() {
 
     const { cartItems, loading, isError }  = useContext(AppContext);
