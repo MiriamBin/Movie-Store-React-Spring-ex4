@@ -4,11 +4,18 @@ import useFetch from './hooks/useFetch';
 import {GENRES_MOVIE_LIST_URL} from "./constants/ApiUrl";
 import {FETCH_ERROR_MSG} from "./constants/Messages";
 
-
+/**
+ * Genres component that renders the genres buttons
+ * @param setQueryParams - function that sets the query params
+ * @returns {JSX.Element} Genres component
+ */
 function Genres({setQueryParams}) {
-    const [{ data: genresData, isLoading: genreIsLoading, isError: genreIsError }, setGenreUrl] = useFetch(GENRES_MOVIE_LIST_URL, { genres: [] });
+    const [{ data: genresData, isLoading: genreIsLoading, isError: genreIsError }] = useFetch(GENRES_MOVIE_LIST_URL, { genres: [] });
     const [selectedGenres, setSelectedGenres] = useState([]);
 
+    /**
+     * Sets the genreUrl when the selectedGenres changes
+     */
     useEffect(() => {
         let genreIds = '';
         if (selectedGenres.length > 0) {
@@ -17,6 +24,10 @@ function Genres({setQueryParams}) {
         setQueryParams(genreIds);
     }, [selectedGenres]);
 
+    /**
+     * Sets the genreUrl
+     * @param genre - genre object
+     */
     const handleGenreSelect = (genre) => {
         const isGenreSelected = selectedGenres.some((selectedGenre) => selectedGenre.id === genre.id);
         if (isGenreSelected) {
@@ -26,10 +37,16 @@ function Genres({setQueryParams}) {
         }
     };
 
+    /**
+     * Clears the selected genres
+     */
     const handleClearSelection = () => {
         setSelectedGenres([]);
     };
 
+    /**
+     * If genreIsLoading is true, render a spinner, if genreIsError is true, render an error message, otherwise render the genres buttons
+     */
     if (genreIsLoading) {
         return (
             <Row className="justify-content-center text-center">
@@ -40,6 +57,9 @@ function Genres({setQueryParams}) {
         );
     }
 
+    /**
+     * If genreIsError is true, render an error message
+     */
     if (genreIsError) {
         return (
             <Row className="justify-content-center text-center">
@@ -50,6 +70,9 @@ function Genres({setQueryParams}) {
         );
     }
 
+    /**
+     * Otherwise render the genres buttons
+     */
     return (
             <Row className="justify-content text-center m-2">
                 {genresData.genres.map((genre) => (

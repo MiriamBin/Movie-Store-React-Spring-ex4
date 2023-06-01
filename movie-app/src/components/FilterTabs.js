@@ -4,7 +4,17 @@ import YearFilter from './YearFilter';
 import SearchForm from './SearchForm';
 import "./styles/FilterTabs.css";
 
+/**
+ * FilterTabs component that renders the FilterTabs component
+ * @param setMoviesUrl - set movies url
+ * @param queryParams - query params
+ * @param setQueryParams - set query params
+ * @returns {JSX.Element} FilterTabs component
+ */
 function FilterTabs({setMoviesUrl, queryParams, setQueryParams}) {
+    /**
+     * Renders the FilterTabs component
+     */
     return (
         <div className="filter-tabs">
             <Tabs

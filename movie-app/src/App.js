@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import AppNavbar from './components/AppNavbar';
@@ -10,8 +10,6 @@ import CartPage from './components/pages/CartPage';
 import PageNotFound from './components/pages/PageNotFound';
 import CheckoutPage from './components/pages/CheckoutPage';
 import useCart from './components/hooks/useCart'
-import Confirmation from "./components/Confirmation";
-
 
 export const AppContext = React.createContext(null);
 

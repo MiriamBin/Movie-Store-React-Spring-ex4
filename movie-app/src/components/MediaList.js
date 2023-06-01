@@ -3,11 +3,19 @@ import React from "react";
 import {Alert, Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
-function MediaList({ listMovies, setShowToast, setToastMessage }) {
+/**
+ * MediaList component that renders the CardInfo component
+ * @param listMovies - list of movies
+ * @returns {JSX.Element|null} MediaList component
+ */
+function MediaList({ listMovies}) {
 
     if (!Array.isArray(listMovies)) {
         return null; // Return null or show an alternative component/error message when listMovies is not an array
     }
+    /**
+     * Renders the MediaList component
+     */
     return (
         <Container>
             {listMovies.length === 0 ? (

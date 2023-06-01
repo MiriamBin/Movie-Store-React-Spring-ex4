@@ -1,8 +1,14 @@
-import {Button, Card, Col, Row, Image, Modal, Badge} from "react-bootstrap";
+import {Button, Card, Col, Row, Image, Badge} from "react-bootstrap";
 import { useContext } from "react";
 import { AppContext } from "../App";
 import { DEFAULT_MOVIE_IMAGE_URL } from "./constants/ApiUrl";
 
+/**
+ * CartProduct component that renders the CartProduct component
+ * @param product
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function CartProduct({ product }) {
     const { removeFromCart } = useContext(AppContext);
 
@@ -10,7 +16,7 @@ function CartProduct({ product }) {
         <Card className="bg-transparent border-white">
             <Row className="no-gutters">
                 <Col xs={12} md={4} className="d-flex align-items-center">
-                    <Image src={product.imageUrl ? DEFAULT_MOVIE_IMAGE_URL : product.imageUrl} alt={product.title} fluid />
+                    <Image src={!product.imageUrl ? DEFAULT_MOVIE_IMAGE_URL : product.imageUrl} alt={product.title} fluid />
                 </Col>
                 <Col xs={12} md={5}>
                     <Card.Body className="text-white">

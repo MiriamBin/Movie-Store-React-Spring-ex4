@@ -4,12 +4,21 @@ import {AppContext} from "../App";
 import {DEFAULT_MOVIE_IMAGE_URL, TMDB_IMAGE_BASE_URL} from "./constants/ApiUrl";
 import {useContext, useState} from "react";
 
+/**
+ * CardInfo component that renders the CardInfo component
+ * @param movieData - movie data
+ * @returns {JSX.Element} CardInfo component
+ */
 function CardInfo({movieData}) {
     const [showModal, setShowModal] = useState(false);
     const {addToCart} = useContext(AppContext);
 
     const PRICE = 3.99;
 
+    /**
+     * handleAddToCart component that handles the add to cart event
+     * @param event - event of the add to cart
+     */
     function handleAddToCart(event) {
         event.preventDefault();
         addToCart({
@@ -20,6 +29,10 @@ function CardInfo({movieData}) {
         });
     }
 
+    /**
+     * getImageSource component that gets the image source
+     * @returns {string} image source
+     */
     function getImageSource() {
         if (movieData.poster_path) {
             return `${TMDB_IMAGE_BASE_URL}${movieData.poster_path}`;
@@ -28,11 +41,18 @@ function CardInfo({movieData}) {
         }
     }
 
+    /**
+     * handleReadMore component that handles the read more event
+     * @param event - event of the read more
+     */
     function handleReadMore(event) {
         event.preventDefault();
         setShowModal(true);
     }
 
+    /**
+     * Card component that renders the Card component
+     */
     return (
         <Card className="myCard">
             <div className="innerCard">

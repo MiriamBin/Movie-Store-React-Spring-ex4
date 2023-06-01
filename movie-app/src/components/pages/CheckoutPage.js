@@ -6,6 +6,10 @@ import {useNavigate} from "react-router-dom";
 import {AppContext} from "../../App";
 import "../styles/CheckoutStyle.css";
 
+/**
+ * CheckoutPage component that renders the CheckoutForm component
+ * @returns {JSX.Element} CheckoutPage component
+ */
 function CheckoutPage() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -19,6 +23,9 @@ function CheckoutPage() {
     const navigate = useNavigate();
     const { cartItems, clearCart, totalPrice } = useContext(AppContext);
 
+    /**
+     * If cartItems is empty, redirect to cart page
+     */
     useEffect(() => {
         if (cartItems.length === 0) {
             navigate('/cart-page');
@@ -26,16 +33,30 @@ function CheckoutPage() {
     }, [navigate]);
 
 
+    /**
+     * validateEmail component that validates the email
+     * @param email - email of the user
+     * @returns {boolean} true if email is valid, false otherwise
+     */
     const validateEmail = (email) => {
         let re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return re.test(email);
     };
 
+    /**
+     * validateName component that validates the name
+     * @param name - name of the user
+     * @returns {boolean} true if name is valid, false otherwise
+     */
     const validateName = (name) => {
         let re = /^[a-zA-Z\s]*$/;
         return re.test(name);
     };
 
+    /**
+     * handleSubmit component that handles the submit event
+     * @param event - event of the submit
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -88,6 +109,9 @@ function CheckoutPage() {
         }
     };
 
+    /**
+     * CheckoutPage component that renders the CheckoutForm component
+     */
     return (
         <>
             <Container bg="transparent" text="white" className="col-6">

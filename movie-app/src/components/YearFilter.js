@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import {Button, Card, Col, Container, Row} from 'react-bootstrap';
 import Pagination from "./Pagination";
 
+/**
+ * YearFilter component that renders the year filter
+ * @param setQueryParams - function that sets the query params
+ * @returns {JSX.Element} - YearFilter component
+ */
 function YearFilter({ setQueryParams }) {
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 24; // Define how many items per page
 
+    /**
+     * useEffect hook that generates the years array
+     */
     useEffect(() => {
         // Generate years from current year to 1882
         const currentYear = new Date().getFullYear();
@@ -18,6 +26,9 @@ function YearFilter({ setQueryParams }) {
         setYears(yearsArray);
     }, []);
 
+    /**
+     * useEffect hook that sets the query params
+     */
     useEffect(() => {
         if (selectedYear.length > 0) {
             setQueryParams(`&primary_release_year=${selectedYear}`);
@@ -26,6 +37,10 @@ function YearFilter({ setQueryParams }) {
         }
     }, [selectedYear]);
 
+    /**
+     * handleYearSelect function that handles the year selection
+     * @param year  - year to be selected
+     */
     const handleYearSelect = (year) => {
         const isYearSelected = selectedYear.includes(year);
         if (isYearSelected) {
@@ -35,10 +50,12 @@ function YearFilter({ setQueryParams }) {
         }
     };
 
+    /**
+     * handleClearYearSelection function that clears the year selection
+     */
     const handleClearYearSelection = () => {
         setSelectedYear([]);
     };
-
 
     const totalPages = Math.ceil(years.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -46,6 +63,9 @@ function YearFilter({ setQueryParams }) {
     const currentItems = years.slice(indexOfFirstItem, indexOfLastItem);
     const range = `${years[indexOfFirstItem]} - ${years[Math.min(indexOfLastItem - 1, years.length - 1)]}`;
 
+    /**
+     * Return the YearFilter component
+     */
     return (
         <>
             <Card bg="transparent" text="white">

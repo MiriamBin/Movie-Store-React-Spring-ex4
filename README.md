@@ -1,8 +1,34 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/7Tmn2VQK)
 
 # Authors
+Name: Miriam Binyamines Email: miriamman@edu.hac.ac.il
+Name: Salomon Demma Email: dennasa@edu.hac.ac.il
 
 # Explanations
+This project is a movie app that allows you to search for movies - used TMBD api.
+there is a search bar that you can search for movies by name, and a filter that you can filter the movies by genre,
+or by year of release.
+
+also the search history is saved, and you can see it in the search history page.
+by clicking on the search history you can search again for the movie you searched for - its appear in the search bar automatically.
+
+purchase history is also saved in the database.
+after the purches is done, you will be redirected to the home page automatically after few seconds.
+
+# Project Structure
+home page - the main page of the app, you can search for movies here.
+cart page - the page that shows the movies you chose to buy.
+checkout page - the page for entering the details of the buyer.
+search history part - the page that shows the search history
+
+# Project Design
+the project is divided into 3 main parts:
+1. client - the client side of the app, written in react.
+2. server - the server side of the app, written in java.
+3. database - the database of the app.
+
+we used reducer, context and costume hooks in the client side.
+
 
 ---------------------
 

@@ -5,9 +5,16 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useContext } from 'react';
 import { AppContext } from '../App';
 
+/**
+ * AppNavbar component that renders the Navbar component
+ * @returns {JSX.Element} AppNavbar component
+ */
 function AppNavbar() {
     const { cartItems } = useContext(AppContext);
 
+    /**
+     * Renders the AppNavbar component
+     */
     return (
         <>
             <Navbar bg="dark" variant="dark">
@@ -26,9 +33,6 @@ function AppNavbar() {
                 </Nav>
             </Navbar>
             <Outlet />
-            {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
         </>
     );
 }

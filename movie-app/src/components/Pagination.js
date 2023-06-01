@@ -1,23 +1,40 @@
 import {Button, Col, Row} from "react-bootstrap";
-import React, {useEffect} from "react";
 
+/**
+ * Pagination component that renders the pagination buttons
+ * @param totalPages - total number of pages
+ * @param currentPage   - current page
+ * @param setCurrentPage - function that sets the current page
+ * @returns {JSX.Element} - Pagination component
+
+ */
 function Pagination({ totalPages, currentPage, setCurrentPage }) {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
+    /**
+     * handleNextPage function that sets the current page to the next page
+     */
     const handleNextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
 
+    /**
+     *  handlePreviousPage function that sets the current page to the previous page
+     */
     const handlePreviousPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
     };
 
+    /**
+     * handleFirstPage function that sets the current page to the first page
+     * @returns {*[]} - array of page buttons
+     */
     const getPageButtons = () => {
         const buttonsToShow = 5; // Total number of buttons to show (including ellipsis)
         const sideButtons = 2; // Number of buttons to show on each side

@@ -30,6 +30,9 @@ function CartPage() {
         )
     }
 
+    /**
+     * If cartItems is empty, render a message, otherwise render the CartItems and OrderSummary components
+     */
     return (
         <Container fluid className="py-3">
             <Row className="justify-content-center text-center my-3">
