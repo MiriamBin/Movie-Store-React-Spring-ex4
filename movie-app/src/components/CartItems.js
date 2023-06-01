@@ -1,18 +1,17 @@
-import Container from "react-bootstrap/Container";
-import {Button, Card, Col, Row} from "react-bootstrap";
-import CardInfo from "./CardInfo";
-import React from "react";
 import CartProduct from "./CartProduct";
+import {Col, Row, Container} from "react-bootstrap";
+import React, {useContext} from "react";
+import {AppContext} from "../App";
 
-function CartItems({items, removeFromCart}){
-
+function CartItems(){
+    const {cartItems} = useContext(AppContext);
     return (
         <Container>
             <Row className="justify-content-center ">
-                {items.map((movie, idx) => (
-                    <Row className="m-2">
-                        <Col key={idx}>
-                            <CartProduct product={movie} idx={idx} removeFromCart={removeFromCart}/>
+                {cartItems.map((item) => (
+                    <Row key={item.id} className="m-2">
+                        <Col>
+                            <CartProduct product={item}/>
                         </Col>
                     </Row>
                 ))}

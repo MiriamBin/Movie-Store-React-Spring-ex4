@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Spinner} from 'react-bootstrap';
+import {POPULAR_MOVIES_URL} from '../constants/ApiUrl';
+import {FETCH_ERROR_MSG} from "../constants/Messages";
 import MediaList from '../MediaList';
 import useFetch from '../hooks/useFetch';
-import {POPULAR_MOVIES_URL} from '../constants/ApiUrl';
 import FilterTabs from "../FilterTabs";
-import {FETCH_ERROR_MSG} from "../constants/Messages";
 
 function SearchPage() {
     const [queryParams, setQueryParams] = useState("");
@@ -12,10 +12,10 @@ function SearchPage() {
         POPULAR_MOVIES_URL + `&page=${1}`,
         { results: [] }
     );
-
     useEffect(() => {
         setMoviesUrl(POPULAR_MOVIES_URL + queryParams + `&page=${1}`);
     }, [queryParams]);
+
 
     return (
         <>

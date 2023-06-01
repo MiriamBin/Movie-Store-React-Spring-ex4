@@ -43,22 +43,6 @@ function CardInfo({movieData}) {
         }
     }
 
-/*
-    Title: Cars
-    Original Title: Cars
-    Release Date: June 8, 2006
-    Overview: Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town's offbeat characters.
-    Popularity: 42.409
-    Vote Average: 6.92
-    Vote Count: 12,572
-    Adult: false
-    Backdrop Path: "/sd4xN5xi8tKRPrJOWwNiZEile7f.jpg"
-    Genre IDs: [16, 12, 35, 10751]
-    Original Language: English
-    Poster Path: "/u4G8EkiIBZYx0wEg2xDlXZigTOZ.jpg"
-    Video: false
-*/
-
     return (
         <Card className="myCard">
             <div className="innerCard">

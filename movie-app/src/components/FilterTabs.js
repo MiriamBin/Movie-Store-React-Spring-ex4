@@ -10,17 +10,14 @@ function FilterTabs({setMoviesUrl, queryParams, setQueryParams}) {
             <Tabs
                 defaultActiveKey="profile"
                 id="justify-tab-example"
-                vriant="pills"
-                className="m-3"
+                className="m-3 "
                 justify>
                 <Tab  eventKey="Search" title="Search" className="tab-pane">
                     <SearchForm setMoviesUrl={setMoviesUrl} />
                 </Tab>
-
                 <Tab eventKey="Genres" title="Genres" className="tab-pane">
                     <Genres setMoviesUrl={setMoviesUrl} />
                 </Tab>
-
                 <Tab eventKey="Year-Filter" title="Year Filter" className="tab-pane">
                     <YearFilter queryParams={queryParams} setQueryParams={setQueryParams} />
                 </Tab>

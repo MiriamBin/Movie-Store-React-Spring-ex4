@@ -31,10 +31,10 @@ const historyReducer = (state, action) => {
 
 function App() {
     const [searchHistory, setSearchHistory] = useState([]);
-    const { cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart} = useCart();
+    const { cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart, isError} = useCart();
 
     return (
-        <AppContext.Provider value={{searchHistory, setSearchHistory, cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart}}>
+        <AppContext.Provider value={{searchHistory, setSearchHistory, cartItems, totalPrice, loading, isError, removeFromCart, clearCart, addToCart}}>
             <div
                 style={{
                     background: '#212121',

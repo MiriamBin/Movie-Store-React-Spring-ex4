@@ -1,4 +1,4 @@
-package hac;
+package hac.controllers;
 
 import hac.repo.Purchase;
 import hac.repo.PurchaseRepository;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, Form} from 'react-bootstrap';
+import {Button, Card, Form} from 'react-bootstrap';
 import HistorySearch from './HistorySearch';
 import {useContext} from 'react';
 import {AppContext} from "../App";
@@ -9,6 +9,7 @@ import {SEARCH_MOVIES_URL} from "./constants/ApiUrl";
 function SearchForm({ setMoviesUrl}) {
     //TODO: handle empty search query
     const {searchHistory, setSearchHistory} = useContext(AppContext);
+
     const [searchQuery, setSearchQuery] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -28,15 +29,21 @@ function SearchForm({ setMoviesUrl}) {
             <Form.Text id="heading">Search</Form.Text>
             <Form.Group className="search-form-field" onClick={() => setShowDropdown(!showDropdown)}>
                 <Form.Control
+                    required
                     placeholder="Titles, people..."
                     type="text"
                     value={searchQuery}
                     onChange={handleOnChange}/>
             </Form.Group>
-            <HistorySearch setSearchQuery={setSearchQuery} showDropdown={showDropdown} />
-            <Button className="search-form-search-btn" type="submit">
-                Search
-            </Button>
+            <Form.Group>
+                <Button className="search-form-search-btn w-100" type="submit">
+                    Search
+                </Button>
+            </Form.Group>
+            <Form.Text id="heading">Search History</Form.Text>
+
+            <HistorySearch setSearchQuery={setSearchQuery} showDropdown={showDropdown}/>
+
         </Form>
     );
 }

@@ -5,15 +5,14 @@ const useCart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [isError, setIsError] = useState(true);
 
     const handleFetch = async (endpoint, method, data = null) => {
         try {
             const response = await axios({
                 method: method,
                 url: endpoint,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: {'Content-Type': 'application/json',},
                 data: data,
             });
 
@@ -32,9 +31,15 @@ const useCart = () => {
             .then(data => {
                 setCartItems(data.cart);
                 setTotalPrice(data.total);
-                setLoading(false);
+                setIsError(false);
             })
-            .catch(console.error);
+            .catch(() => {
+                console.error('Error fetching cart');
+                setIsError(true);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, []);
 
     const removeFromCart = (productId) => {
@@ -64,6 +69,6 @@ const useCart = () => {
             .catch(console.error);
     };
 
-    return { cartItems, totalPrice, removeFromCart, clearCart, addToCart, loading }; // Add addToCart to the returned object
+    return { cartItems, totalPrice, removeFromCart, clearCart, addToCart, loading, isError }; // Add addToCart to the returned object
 }
 export default useCart;

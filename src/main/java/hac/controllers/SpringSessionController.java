@@ -1,4 +1,4 @@
-package hac;
+package hac.controllers;
 
 import hac.springbeans.Cart;
 import hac.springbeans.Product;

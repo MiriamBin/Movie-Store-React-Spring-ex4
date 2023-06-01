@@ -32,7 +32,6 @@
     outline: none;
     color: #fff;
     background-color: #171717;
-    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
 }
 
 .tab-pane input {

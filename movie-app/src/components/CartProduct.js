@@ -1,8 +1,11 @@
 import { Button, Card, Col, Row, Image } from "react-bootstrap";
+import {useContext} from "react";
+import {AppContext} from "../App";
 
-function CartProduct({ product, removeFromCart }) {
+function CartProduct({ product }) {
+    const {removeFromCart} = useContext(AppContext);
+
     return (
-
         <Card className="bg-transparent border-white">
             <Row className="no-gutters">
                 <Col xs={12} md={4}>
