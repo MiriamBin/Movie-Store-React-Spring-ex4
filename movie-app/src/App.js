@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-import React, { useState } from 'react';
+import React, {useReducer, useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import AppNavbar from './components/AppNavbar';
@@ -10,31 +10,30 @@ import CartPage from './components/pages/CartPage';
 import PageNotFound from './components/pages/PageNotFound';
 import CheckoutPage from './components/pages/CheckoutPage';
 import useCart from './components/hooks/useCart'
+import Confirmation from "./components/Confirmation";
 
 
 export const AppContext = React.createContext(null);
 
-const historyReducer = (state, action) => {
+const searchHistoryReducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
             return state.includes(action.payload) ? state : [...state, action.payload];
         case 'DELETE':
-            const newState = [...state];
-            newState.splice(action.payload, 1);
-            return newState;
+            return state.filter((_, index) => index !== action.payload);
         case 'DELETE_ALL':
             return [];
         default:
             throw new Error();
     }
-}
+};
 
 function App() {
-    const [searchHistory, setSearchHistory] = useState([]);
+    const [searchHistory, dispatch] = useReducer(searchHistoryReducer, []);
     const { cartItems, totalPrice, removeFromCart, clearCart, loading, addToCart, isError} = useCart();
 
     return (
-        <AppContext.Provider value={{searchHistory, setSearchHistory, cartItems, totalPrice, loading, isError, removeFromCart, clearCart, addToCart}}>
+        <AppContext.Provider value={{searchHistory, dispatch, cartItems, totalPrice, loading, isError, removeFromCart, clearCart, addToCart}}>
             <div
                 style={{
                     background: '#212121',

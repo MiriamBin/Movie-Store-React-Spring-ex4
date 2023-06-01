@@ -1,29 +1,14 @@
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Modal} from "react-bootstrap";
 import "./styles/CardInfo.css"
 import {AppContext} from "../App";
-import {useContext} from "react";
+import {DEFAULT_MOVIE_IMAGE_URL} from "./constants/ApiUrl";
+import {useContext, useState} from "react";
 
 function CardInfo({movieData}) {
-
+    const [showModal, setShowModal] = useState(false);
     const {addToCart} = useContext(AppContext);
 
     const PRICE = 3.99;
-
-    function handleResponse(response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Something went wrong');
-        }
-    }
-
-    function handleJson(data) {
-        //console.log(data); TODO: get other from server
-    }
-
-    function handleError(error) {
-        console.log(error);
-    }
 
     function handleAddToCart(event) {
         event.preventDefault();
@@ -38,9 +23,14 @@ function CardInfo({movieData}) {
     function getImageSource() {
         if (movieData.poster_path) {
             return `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
-        } else { //TODO: use constant
-            return './image-not-found.jpg'; // Replace with the URL of your default image
+        } else {
+            return DEFAULT_MOVIE_IMAGE_URL;
         }
+    }
+
+    function handleReadMore(event) {
+        event.preventDefault();
+        setShowModal(true);
     }
 
     return (
@@ -61,9 +51,23 @@ function CardInfo({movieData}) {
                         price: {PRICE}
                     </Card.Text>
                     <Button className="content-btn" onClick={handleAddToCart}>Add to cart</Button>
-                    <Button className="content-btn">Read more</Button>
+                    <Button className="content-btn" onClick={handleReadMore}>Read more</Button>
                 </div>
             </div>
+            <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="dark-modal">
+                <Modal.Header closeButton style={{ backgroundColor: '#333', color: 'white' }}>
+                    <Modal.Title>{movieData.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ backgroundColor: '#333', color: 'white' }}>
+                    <p>{movieData.overview}</p>
+                </Modal.Body>
+                <Modal.Footer style={{ backgroundColor: '#333' }}>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </Card>
     );
 }

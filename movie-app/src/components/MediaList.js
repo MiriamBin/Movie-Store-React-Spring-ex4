@@ -3,12 +3,11 @@ import React from "react";
 import {Alert, Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
-function MediaList({ listMovies }) {
-    // TODO: i don't understand for what this function is used
+function MediaList({ listMovies, setShowToast, setToastMessage }) {
+
     if (!Array.isArray(listMovies)) {
         return null; // Return null or show an alternative component/error message when listMovies is not an array
     }
-
     return (
         <Container>
             {listMovies.length === 0 ? (

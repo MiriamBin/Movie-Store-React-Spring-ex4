@@ -15,7 +15,7 @@
     border: 1px solid black;
 }
 
-#heading {
+.search-form #heading {
     text-align: center;
     margin: 1em;
     color: #fff;
@@ -67,3 +67,4 @@
     background-color: black;
     color: #fff;
 }
+

@@ -7,8 +7,7 @@ import "./styles/SearchFormStyle.css"
 import {SEARCH_MOVIES_URL} from "./constants/ApiUrl";
 
 function SearchForm({ setMoviesUrl}) {
-    //TODO: handle empty search query
-    const {searchHistory, setSearchHistory} = useContext(AppContext);
+    const {searchHistory, dispatch} = useContext(AppContext);
 
     const [searchQuery, setSearchQuery] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
@@ -16,7 +15,7 @@ function SearchForm({ setMoviesUrl}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         setMoviesUrl(SEARCH_MOVIES_URL + encodeURIComponent(searchQuery) +`&page=${1}`);
-        setSearchHistory([...searchHistory, searchQuery]);
+        dispatch({ type: 'ADD', payload: searchQuery });
         setSearchQuery('');
     };
 
@@ -26,7 +25,6 @@ function SearchForm({ setMoviesUrl}) {
 
     return (
         <Form bg="transparent" text="white" onSubmit={handleSubmit}>
-            <Form.Text id="heading">Search</Form.Text>
             <Form.Group className="search-form-field" onClick={() => setShowDropdown(!showDropdown)}>
                 <Form.Control
                     required
@@ -40,10 +38,7 @@ function SearchForm({ setMoviesUrl}) {
                     Search
                 </Button>
             </Form.Group>
-            <Form.Text id="heading">Search History</Form.Text>
-
             <HistorySearch setSearchQuery={setSearchQuery} showDropdown={showDropdown}/>
-
         </Form>
     );
 }

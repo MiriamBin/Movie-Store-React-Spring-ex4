@@ -17,8 +17,7 @@ function OrderSummary(){
                         <LinkContainer to="/checkout-page">
                             <Button
                                 className="content-btn-cart"
-                                disabled={cartItems.length === 0}
-                            >
+                                disabled={cartItems.length === 0}>
                                 Checkout
                             </Button>
                         </LinkContainer>
@@ -26,7 +25,7 @@ function OrderSummary(){
                 </Card.Body>
             </Card>
             <Card.Footer className="text-white text-center d-flex flex-column justify-content-between mt-3">
-                <Button variant="outline-light" onClick={clearCart}>Clear Cart</Button>
+                <Button variant="outline-danger" onClick={clearCart} disabled={cartItems.length === 0}>Clear Cart</Button>
             </Card.Footer>
         </Row>
     );

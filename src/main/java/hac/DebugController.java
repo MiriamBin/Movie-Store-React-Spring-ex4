@@ -19,14 +19,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/debug")
 public class DebugController {
+    /**
+     * This is the JPA repository (SQL database)
+     */
     @Autowired
     private PurchaseRepository repository;  // this is the JPA repository (SQL database)
 
+    /**
+     * This method is responsible for returning all the purchases in the database.
+     * @return - all the purchases in the database
+     */
     @GetMapping("/purchases")
     public List<Purchase> showPurchases() {
         return repository.findAll(); // this is a JPA method to get all the purchases
     }
 
+    /**
+     * This method is responsible for adding a purchase to the database.
+     * @param purchase - the purchase that was sent in the request
+     * @return - the purchase that was added
+     */
     @PostMapping("/purchases")
     public Purchase addPurchase(Purchase purchase) {
         return repository.save(purchase); // this is a JPA method to save a purchase to the database

@@ -10,9 +10,16 @@ import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
+/**
+ * This class is responsible for the configuration of the beans.
+ */
 @Configuration
 public class BeanConfiguration {
 
+    /**
+     * This method is responsible for creating a new cart.
+     * @return
+     */
     @Bean
     @SessionScope
     public Cart cart() {
@@ -20,6 +27,10 @@ public class BeanConfiguration {
         return new Cart();
     }
 
+    /**
+     * This method is responsible for creating a new product.
+     * @return - the product
+     */
     @Bean
     @SessionScope
     public Product product() {

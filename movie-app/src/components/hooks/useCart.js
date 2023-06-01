@@ -17,7 +17,6 @@ const useCart = () => {
             });
 
             if (response.status !== 200) {
-                //TODO: handle error
                 throw new Error('Something went wrong');
             }
             return response.data;
@@ -34,7 +33,6 @@ const useCart = () => {
                 setIsError(false);
             })
             .catch(() => {
-                console.error('Error fetching cart');
                 setIsError(true);
             })
             .finally(() => {
