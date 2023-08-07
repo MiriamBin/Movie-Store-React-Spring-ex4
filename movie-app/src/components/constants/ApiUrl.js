@@ -2,7 +2,7 @@
 /*
 * API key for TMDB API
 */
-const API_KEY = "78d0428861881a4570bce56c00beab85";
+const API_KEY = "<KEY>";
 /*
 * base url for TMDB API
 */
