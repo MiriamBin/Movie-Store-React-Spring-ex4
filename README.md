@@ -61,4 +61,3 @@ Look at the DebugController class. It has a method called "addPurchase" that rec
 When you develop your own controller, you must declare the repository member exactly as it is declared in the DebugController class.
 Then you can use it to store purchases in the DB (repository.save(purchase)).
 
-## Still have problems? Come to class.
